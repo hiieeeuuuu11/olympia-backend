@@ -10,7 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -30,6 +35,14 @@ public class round4Controller {
         round4 inf = r4service.saveinfo(r4);
         //System.out.println(r1);
         return new ResponseEntity(inf, HttpStatus.OK);
+    }
+
+    @GetMapping("/getallr4")
+    public ResponseEntity<List<Map<String, Object>>> getAll() {
+        if (r4service.getAllwithImage()== null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(r4service.getAllwithImage());
     }
 
 

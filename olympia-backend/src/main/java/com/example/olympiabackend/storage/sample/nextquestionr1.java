@@ -1,4 +1,4 @@
-package com.example.olympiabackend.model.sample;
+package com.example.olympiabackend.storage.sample;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class nextquestion {
+public class nextquestionr1 {
     private int check;
     private String question;
+    private String A;
+    private String B;
+    private String C;
+    private String D;
 }

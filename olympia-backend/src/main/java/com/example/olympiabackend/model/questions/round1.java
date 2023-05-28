@@ -1,6 +1,7 @@
 package com.example.olympiabackend.model.questions;
 
 import com.example.olympiabackend.model.topic;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString
 @Table(name="round1")
 public class round1 {
     @Id
@@ -29,4 +29,12 @@ public class round1 {
     @JoinColumn(name = "topic")
     topic topic;
 
+    @Override
+    public String toString() {
+        return "round1{" +
+                "IDquestion=" + IDquestion +
+                ", question='" + question + '\'' +
+                ", level1=" + level1 +
+                '}';
+    }
 }

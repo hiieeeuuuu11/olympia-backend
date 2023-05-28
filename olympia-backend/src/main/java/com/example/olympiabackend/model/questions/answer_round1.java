@@ -12,7 +12,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
 @Table(name="answer_round1")
 public class answer_round1 {
 
@@ -29,4 +28,15 @@ public class answer_round1 {
     @JsonBackReference
     round1 round1;
 
+    @Override
+    public String toString() {
+        return "answer_round1{" +
+                "IDanswer=" + IDanswer +
+                ", iscorrect=" + iscorrect +
+                ", A='" + A + '\'' +
+                ", B='" + B + '\'' +
+                ", C='" + C + '\'' +
+                ", D='" + D + '\'' +
+                '}';
+    }
 }
