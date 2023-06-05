@@ -6,18 +6,20 @@ import com.example.olympiabackend.service.questionService.round1.round1Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class round1socket {
 
     @Autowired
     round1Service r1service;
 
     public static int i=0;
-    @MessageMapping("/push")
+    @MessageMapping("/pushr1")
     @SendTo("/topic/round1-websocket")
     public nextquestionr1 sendMessage(Integer answer) {
         List<round1> allround1 = r1service.getAll();
@@ -29,7 +31,7 @@ public class round1socket {
             ques.setCheck(0);
         }
         System.out.println(i);
-        if(i<allround1.size()){
+        if(i<15){
             i++;
             ques.setQuestion(allround1.get(i).getQuestion());
             ques.setA(allround1.get(i).getIdanswer().getA());
@@ -41,9 +43,8 @@ public class round1socket {
         else{
             ques.setQuestion("END");
             i=0;
-            System.out.println(i);
         }
-
+        System.out.println(ques);
         return ques;
     }
 

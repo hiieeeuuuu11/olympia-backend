@@ -18,7 +18,7 @@ public class round1Controller {
     round1Service r1service;
 
     @CrossOrigin
-    @PostMapping("/excel")
+    @PostMapping("/excel_r1")
     public ResponseEntity<List<round1>> saveInfo(@RequestBody MultipartFile file){
         List<round1> inf = r1service.saveinfoexcel(file);
         return new ResponseEntity(inf, HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.example.olympiabackend.controller.competition;
 
+import com.example.olympiabackend.model.User;
 import com.example.olympiabackend.model.questions.round2;
 import com.example.olympiabackend.model.questions.suggest_quest;
 import com.example.olympiabackend.storage.sample.nextquestionr2;
@@ -11,8 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +26,9 @@ public class round2socket {
 
     @Autowired
     round2Service r2service;
+
+    public Map<String,String> allanswer = new HashMap<>();
+
 
 //    @Bean
 //    public Map<String,Object> All(){
@@ -38,9 +45,8 @@ public class round2socket {
     public static int i2=0;
     @MessageMapping("/pushr2_1")
     @SendTo("/topic/round2-websocket")
-    @Transactional
     public nextquestionr2 chooseQuestion(int number){
-        round2 r2 = r2service.getOne(1);
+        round2 r2 = r2service.getOne(i2);
         List<suggest_quest> suggest = r2.getSuggest();
         Map<String,Object> allr2 = r2service.getOneWithImage(r2);
         switch (number){
@@ -57,20 +63,16 @@ public class round2socket {
     }
 
     @MessageMapping("/pushr2_2")
-    @SendTo("/topic/round2-websocket")
-    @Transactional
-    public nextquestionr2_2 checkAnswer(String in){
-        round2 r2 = r2service.getOne(1);
-        List<suggest_quest> suggest = r2.getSuggest();
-        Map<String,Object> allr2 = r2service.getOneWithImage(r2);
-        if(in.equals(suggest.get(1).getAnswer())){
-            return new nextquestionr2_2(1,(String) allr2.get("image"),2);
-        }
-        else{
-            return new nextquestionr2_2(0,"",2);
-        }
+    public void sendAnswer(String answer){
+        System.out.println(allanswer);
     }
 
+
+    @MessageMapping("/pushr2_3")
+    @SendTo("/topic/round3-websocket")
+    public int sendAllAnswer(){
+        return 1;
+    }
 
 
 }

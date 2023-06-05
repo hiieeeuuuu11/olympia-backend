@@ -2,6 +2,7 @@ package com.example.olympiabackend.controller.question;
 
 import com.example.olympiabackend.model.questions.round3;
 import com.example.olympiabackend.service.questionService.round3.round3Service;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,8 @@ import java.util.List;
 public class round3Controller {
     @Autowired
     round3Service r3service;
-    
+
+    List<round3> r3 ;
 
     @PostMapping("/r")
     public ResponseEntity<round3> saveInfo(@RequestBody round3 r3){

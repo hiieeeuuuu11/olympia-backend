@@ -10,7 +10,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class nextquestionr3 {
-    private int check;
     private String question;
     private String image;
 }

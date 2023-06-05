@@ -45,7 +45,7 @@ public class round3ServiceImpl implements round3Service {
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("round3", round3Object);
 
-            String imagePath = "E:/OLYMPIA/round4/" + round3Object.getSource();
+            String imagePath = "E:/OLYMPIA/Round3/" + round3Object.getSource();
             System.out.println(imagePath);
             String base64Image = "";
             if (round3Object.getSource() != null) {

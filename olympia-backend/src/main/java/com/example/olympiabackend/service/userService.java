@@ -1,11 +1,11 @@
 package com.example.olympiabackend.service;
 
-import com.example.olympiabackend.model.user_info;
+import com.example.olympiabackend.model.User;
 
 public interface userService {
 
-    public user_info signup(user_info user);
-    public user_info login(user_info user);
+    public User signup(User user);
+    public User login(User user);
 
 
 }
